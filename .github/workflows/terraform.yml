@@ -36,6 +36,12 @@ jobs:
         data_project="${{ secrets.GCP_DATA_PROJECT }}"
         EOF
 
+    - name: Set Up GCP Credentials
+      run: |
+        echo "${{ secrets.GCP_CREDS_TF }}" > $GITHUB_WORKSPACE/gcp-creds.json
+      shell: bash
+
+
     # Initialize a new or existing Terraform working directory
     - name: Terraform Init
       run: terraform init
