@@ -1,9 +1,3 @@
-provider "google" {
-  region      = "europe-west2"
-  project     = "inner-replica-417201"
-  credentials = file("${path.module}/gcp-creds.json")
-}
-
 terraform {
   required_providers {
     google = {
@@ -15,6 +9,13 @@ terraform {
   backend "gcs" {
     bucket      = "statebucket301"
     prefix      = "terraform/state"
-    credentials = "${path.module}/gcp-creds.json"
+    credentials = "gcp-creds.json"  // Direct relative path
   }
 }
+
+provider "google" {
+  region      = "europe-west2"
+  project     = "inner-replica-417201"
+  credentials = file("${path.module}/gcp-creds.json")
+}
+
