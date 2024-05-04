@@ -75,10 +75,10 @@ jobs:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
     - name: Set Up GCP Credentials
-      env:
-        GCP_CREDS: ${{ secrets.GCP_CREDS_TF }}
       run: |
-        echo "GCP_CREDS=$GCP_CREDS" >> $GITHUB_ENV
+        echo "${{ secrets.GCP_CREDS_TF }}" > $GITHUB_WORKSPACE/gcp-creds.json
+      shell: bash
+
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
