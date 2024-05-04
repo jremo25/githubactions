@@ -7,20 +7,20 @@ terraform {
   }
 
   backend "gcs" {
-    bucket         = "statebucket301"
-    prefix         = "terraform/state"
-    credentials    = jsondecode(var.gcp_creds)
+    bucket      = "statebucket301"
+    prefix      = "terraform/state"
+    credentials = "${path.module}/gcp-creds.json"
   }
 }
 
 provider "google" {
   region      = "europe-west2"
   project     = "inner-replica-417201"
-  credentials = jsondecode(var.gcp_creds)
+  credentials = file("${path.module}/gcp-creds.json")
 }
 
-variable "gcp_creds" {
-  description = "GCP Credentials JSON"
+variable "gcp_creds_path" {
+  description = "Path to the GCP credentials file"
   type        = string
-  sensitive   = true
+  default     = "${path.module}/gcp-creds.json"
 }
