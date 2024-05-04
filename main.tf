@@ -9,7 +9,7 @@ terraform {
   backend "gcs" {
     bucket      = "statebucket301"
     prefix      = "terraform/state"
-    credentials = "${path.module}/gcp-creds.json"
+    credentials = "gcp-creds.json"
   }
 }
 
@@ -22,5 +22,5 @@ provider "google" {
 variable "gcp_creds_path" {
   description = "Path to the GCP credentials file"
   type        = string
-  default     = "${path.module}/gcp-creds.json"
+  default     = "gcp-creds.json"
 }
